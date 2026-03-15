@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>NanoClaw</Name>
+
+  <Repository>bitcryptic/nanoclaw:latest</Repository>
+  <Registry>https://hub.docker.com/r/bitcryptic/nanoclaw</Registry>
+  <Beta>false</Beta>
+  <Category>Tools: Other</Category>
+  <Date>2026-03-15</Date>
+
+  <Network>bridge</Network>
+  <MyIP></MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+
+  <Support>https://github.com/bitcryptic-gw/unraid-nanoclaw</Support>
+  <Project>https://github.com/qwibitai/nanoclaw</Project>
+
+  <TemplateURL>https://raw.githubusercontent.com/bitcryptic-gw/unraid-nanoclaw/main/NanoClaw.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/bitcryptic-gw/unraid-nanoclaw/main/icon.png</Icon>
+
+  <Overview>
+NanoClaw is a lightweight, secure personal AI agent that runs on your own server.
+It connects to Telegram (and other messaging apps) and runs every agent session
+inside an isolated Docker container — so the AI only sees what you explicitly give it access to.
+
+Built as a minimal alternative to OpenClaw/Clawdbot, NanoClaw has ~15 source files
+you can actually read and understand. No complex config files — customise by
+telling Claude Code what you want changed.
+
+Features:
+- Telegram, WhatsApp, Slack, Discord support
+- Per-group isolated agent containers
+- Scheduled tasks (morning briefings, weekly reviews, etc.)
+- Web search and fetch
+- Agent Swarms (teams of specialised agents)
+- Memory via per-group CLAUDE.md files
+
+Requirements:
+- Anthropic API key (console.anthropic.com) OR Claude Pro/Max subscription OAuth token
+- Telegram bot token from @BotFather (or other channel credentials)
+- Docker socket access (required for agent container isolation)
+
+After starting the container, register your chat by sending /chatid to your bot
+in Telegram, then run the register command — see the project README for details.
+
+Project: https://github.com/qwibitai/nanoclaw
+Unraid template: https://github.com/bitcryptic-gw/unraid-nanoclaw
+  </Overview>
+
+  <ExtraParams></ExtraParams>
+  <PostArgs></PostArgs>
+
+  <!-- Docker socket — required for agent container isolation -->
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Required. Gives NanoClaw access to the host Docker daemon so it can spin up isolated agent containers for each conversation." Type="Device" Display="always" Required="true" Mask="false"/>
+
+  <!-- Persistent data volumes -->
+  <Config Name="AppData" Target="/app/data" Default="/mnt/cache/appdata/nanoclaw/data" Mode="rw" Description="Persistent data: SQLite database, sessions, IPC, env copy." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Store" Target="/app/store" Default="/mnt/cache/appdata/nanoclaw/store" Mode="rw" Description="Persistent store: registered groups, messages, scheduled tasks." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Groups" Target="/app/groups" Default="/mnt/cache/appdata/nanoclaw/groups" Mode="rw" Description="Per-group CLAUDE.md memory files and agent runner source." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Logs" Target="/app/logs" Default="/mnt/cache/appdata/nanoclaw/logs" Mode="rw" Description="NanoClaw service logs." Type="Path" Display="always" Required="true" Mask="false"/>
+
+  <!-- Required environment variables -->
+  <Config Name="HOST_PROJECT_ROOT" Target="HOST_PROJECT_ROOT" Default="/mnt/cache/appdata/nanoclaw" Mode="" Description="Required. Host path to the NanoClaw appdata directory. Must match the host-side path of the AppData volume mount so agent containers can resolve volume paths correctly." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="TELEGRAM_BOT_TOKEN" Target="TELEGRAM_BOT_TOKEN" Default="" Mode="" Description="Required (if using Telegram). Bot token from @BotFather in Telegram." Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="ANTHROPIC_API_KEY" Target="ANTHROPIC_API_KEY" Default="" Mode="" Description="Anthropic API key from console.anthropic.com. Use this OR CLAUDE_CODE_OAUTH_TOKEN." Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="CLAUDE_CODE_OAUTH_TOKEN" Target="CLAUDE_CODE_OAUTH_TOKEN" Default="" Mode="" Description="Claude Pro/Max subscription OAuth token. Use this OR ANTHROPIC_API_KEY. Obtain by running 'claude setup-token' with Claude Code installed." Type="Variable" Display="always" Required="false" Mask="true"/>
+
+  <!-- Credential proxy port -->
+  <Config Name="Credential Proxy (host 3001)" Target="3001" Default="3001" Mode="tcp" Description="Internal credential proxy port used by agent containers to reach the Anthropic API. Only needs to be accessible on the local Docker bridge network. Change if port 3001 is already in use." Type="Port" Display="advanced" Required="true" Mask="false"/>
+
+</Container>
