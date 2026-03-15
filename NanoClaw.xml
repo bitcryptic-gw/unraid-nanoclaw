@@ -13,7 +13,7 @@
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
 
-  <Support>https://github.com/bitcryptic-gw/unraid-nanoclaw</Support>
+  <Support>https://forums.unraid.net/topic/197773-support-nanoclaw-lightweight-secure-ai-agent-for-unraid/</Support>
   <Project>https://github.com/qwibitai/nanoclaw</Project>
 
   <TemplateURL>https://raw.githubusercontent.com/bitcryptic-gw/unraid-nanoclaw/main/NanoClaw.xml</TemplateURL>
