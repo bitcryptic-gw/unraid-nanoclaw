@@ -52,7 +52,7 @@ Unraid template: https://github.com/bitcryptic-gw/unraid-nanoclaw
   <PostArgs></PostArgs>
 
   <!-- Docker socket — required for agent container isolation -->
-  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Required. Gives NanoClaw access to the host Docker daemon so it can spin up isolated agent containers for each conversation." Type="Device" Display="always" Required="true" Mask="false"/>
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Required. Gives NanoClaw access to the host Docker daemon so it can spin up isolated agent containers for each conversation." Type="Path" Display="always" Required="true" Mask="false"/>
 
   <!-- Persistent data volumes -->
   <Config Name="AppData" Target="/app/data" Default="/mnt/cache/appdata/nanoclaw/data" Mode="rw" Description="Persistent data: SQLite database, sessions, IPC, env copy." Type="Path" Display="always" Required="true" Mask="false"/>
