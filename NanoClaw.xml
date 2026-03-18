@@ -41,6 +41,22 @@ Requirements:
 - Telegram bot token from @BotFather (or other channel credentials)
 - Docker socket access (required for agent container isolation)
 
+Optional: Tailscale Integration
+NanoClaw can join your Tailscale tailnet for secure private access.
+To enable:
+1. Generate a reusable auth key at login.tailscale.com/admin/settings/keys
+   - Enable "Reusable"
+   - Recommended: assign a tag (e.g. tag:servers) for better ACL control
+     Tags must be defined in your tailnet ACL policy before use
+2. Enable Tailscale in the settings below and add your auth key to the
+   "Extra Tailscale Parameters" field using the format:
+   --authkey=tskey-auth-XXXXXXXXX
+3. Set a hostname (default: nanoclaw) to identify this node on your tailnet
+
+Note: The Tailscale state directory is pre-configured to persist your node
+identity across container restarts. Do not change this unless you have a
+specific reason to.
+
 After starting the container, register your chat by sending /chatid to your bot
 in Telegram, then run the register command — see the project README for details.
 
@@ -76,5 +92,21 @@ Unraid template: https://github.com/bitcryptic-gw/unraid-nanoclaw
 
   <!-- Credential proxy port -->
   <Config Name="Credential Proxy (host 3001)" Target="3001" Default="3001" Mode="tcp" Description="Internal credential proxy port used by agent containers to reach the Anthropic API. Only needs to be accessible on the local Docker bridge network. Change if port 3001 is already in use." Type="Port" Display="advanced" Required="true" Mask="false"/>
+
+  <!-- Some reasonable defaults for Tailscale-->
+  <TailscaleEnabled>false</TailscaleEnabled>
+  <TailscaleIsExitNode>false</TailscaleIsExitNode>
+  <TailscaleHostname>nanoclaw</TailscaleHostname>
+  <TailscaleExitNodeIP/>
+  <TailscaleSSH>false</TailscaleSSH>
+  <TailscaleUserspaceNetworking>true</TailscaleUserspaceNetworking>
+  <TailscaleLANAccess>false</TailscaleLANAccess>
+  <TailscaleServe>no</TailscaleServe>
+  <TailscaleWebUI/>
+  <TailscaleDParams/>
+  <TailscaleParams/>
+  <TailscaleRoutes/>
+  <TailscaleAcceptRoutes>false</TailscaleAcceptRoutes>
+  <TailscaleStateDir>/mnt/cache/appdata/nanoclaw/tailscale</TailscaleStateDir>
 
 </Container>
