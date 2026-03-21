@@ -91,6 +91,7 @@ Unraid template: https://github.com/bitcryptic-gw/unraid-nanoclaw
   <Config Name="Tailscale Tailnet" Target="TAILSCALE_TAILNET" Default="myth-nessie.ts.net" Mode="" Description="Your Tailscale tailnet name. Found in the Tailscale admin console." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Home Assistant URL" Target="HA_URL" Default="http://homeassistant:8123" Mode="" Description="URL of your Home Assistant instance. Use http://YOUR-UNRAID-IP:8123 if HA is on the same Unraid server." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Home Assistant Token" Target="HA_TOKEN" Default="" Mode="" Description="Long-lived access token from Home Assistant. Create at Profile → Long-Lived Access Tokens in HA." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Tailscale State Directory" Target="/mnt/cache/appdata/nanoclaw/tailscale" Default="/mnt/cache/appdata/nanoclaw/tailscale" Mode="rw" Description="Persistent Tailscale state directory. Prevents new node identity being created on each restart." Type="Path" Display="advanced" Required="false" Mask="false"/>
 
   <!-- Credential proxy port -->
   <Config Name="Credential Proxy (host 3001)" Target="3001" Default="3001" Mode="tcp" Description="Internal credential proxy port used by agent containers to reach the Anthropic API. Only needs to be accessible on the local Docker bridge network. Change if port 3001 is already in use." Type="Port" Display="advanced" Required="true" Mask="false"/>
