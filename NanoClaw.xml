@@ -94,7 +94,7 @@ Unraid template: https://github.com/bitcryptic-gw/unraid-nanoclaw
   <Config Name="Tailscale State Directory" Target="/mnt/cache/appdata/nanoclaw/tailscale" Default="/mnt/cache/appdata/nanoclaw/tailscale" Mode="rw" Description="Persistent Tailscale state directory. Prevents new node identity being created on each restart." Type="Path" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Ollama URL" Target="OLLAMA_URL" Default="http://ollama:11434" Mode="" Description="URL of your Ollama instance. Use http://ollama:11434 if Ollama is on the same Docker network as NanoClaw." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Paperclip URL" Target="PAPERCLIP_URL" Default="http://paperclip:3100" Mode="" Description="URL of your Paperclip instance. Use http://paperclip:3100 if on the same Docker network." Type="Variable" Display="advanced" Required="false" Mask="false"/>
-  <Config Name="Paperclip API Key" Target="PAPERCLIP_API_KEY" Default="" Mode="" Description="Paperclip API key for k2 to post comments back to issues." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Paperclip Agent JWT Secret" Target="PAPERCLIP_AGENT_JWT_SECRET" Default="" Mode="" Description="JWT secret from Paperclip used to authenticate agent API calls. Found in your Paperclip appdata at instances/default/.env" Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Paperclip Webhook Secret" Target="PAPERCLIP_WEBHOOK_SECRET" Default="" Mode="" Description="Bearer token Paperclip uses to authenticate heartbeat calls to NanoClaw." Type="Variable" Display="advanced" Required="false" Mask="true"/>
   <Config Name="Paperclip Group Folder" Target="PAPERCLIP_GROUP_FOLDER" Default="" Mode="" Description="NanoClaw group folder that receives Paperclip tasks, e.g. telegram_5643728825." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Paperclip Webhook Port" Target="PAPERCLIP_WEBHOOK_PORT" Default="3102" Mode="" Description="Port for the Paperclip webhook server. Default 3102." Type="Variable" Display="advanced" Required="false" Mask="false"/>
@@ -102,7 +102,7 @@ Unraid template: https://github.com/bitcryptic-gw/unraid-nanoclaw
   <!-- Credential proxy port -->
   <Config Name="Credential Proxy (host 3001)" Target="3001" Default="3001" Mode="tcp" Description="Internal credential proxy port used by agent containers to reach the Anthropic API. Only needs to be accessible on the local Docker bridge network. Change if port 3001 is already in use." Type="Port" Display="advanced" Required="true" Mask="false"/>
   <Config Name="Paperclip Webhook (port 3102)" Target="3102" Default="3102" Mode="tcp" Description="Paperclip webhook port for receiving heartbeats from Paperclip." Type="Port" Display="advanced" Required="false" Mask="false"/>
-  
+
   <!-- Some reasonable defaults for Tailscale-->
   <TailscaleEnabled>false</TailscaleEnabled>
   <TailscaleIsExitNode>false</TailscaleIsExitNode>
