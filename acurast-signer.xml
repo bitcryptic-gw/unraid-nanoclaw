@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>acurast-signer</Name>
+
+  <Repository>bitcryptic/acurast-signer:latest</Repository>
+  <Registry>https://hub.docker.com/r/bitcryptic/acurast-signer</Registry>
+  <Beta>false</Beta>
+  <Category>Tools: Other</Category>
+  <Date>2026-04-29</Date>
+
+  <Network>ai-local</Network>
+  <MyIP></MyIP>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+
+  <Project>https://github.com/bitcryptic-gw/acurast-signer</Project>
+  <TemplateURL>https://raw.githubusercontent.com/bitcryptic-gw/unraid-nanoclaw/main/acurast-signer.xml</TemplateURL>
+
+  <Overview>
+Polkadot extrinsic signing sidecar for Acurast staking.
+
+Runs as a lightweight HTTP service on port 3200 (inter-container only — no host port binding).
+Accepts signed POST /submit requests from the NanoClaw agent container to compound staking
+rewards on the Acurast mainnet without exposing the mnemonic to the agent.
+
+Secrets are read from Docker secrets files at /run/secrets/mnemonic and
+/run/secrets/hmac-token — never from environment variables.
+
+The service will refuse to start if either secret file is missing or empty.
+  </Overview>
+
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs></PostArgs>
+
+  <!-- Secret file mounts (read-only) -->
+  <Config Name="Mnemonic Secret" Target="/run/secrets/mnemonic" Default="/mnt/cache/appdata/acurast-signer/secrets/mnemonic" Mode="ro" Description="Required. Host file containing the SR25519 mnemonic phrase for the Acurast signing keypair. Must be a plain-text file containing only the mnemonic. Never stored in an environment variable." Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="HMAC Token Secret" Target="/run/secrets/hmac-token" Default="/mnt/cache/appdata/acurast-signer/secrets/hmac-token" Mode="ro" Description="Required. Host file containing the shared HMAC token used to authenticate POST /submit requests from NanoClaw. Must match the ACURAST_HMAC_TOKEN value configured in NanoClaw." Type="Path" Display="always" Required="true" Mask="false"/>
+
+</Container>
