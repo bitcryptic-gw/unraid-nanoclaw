@@ -12,6 +12,7 @@
   <MyIP></MyIP>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
+  <Autostart>true</Autostart>
 
   <Support>https://forums.unraid.net/topic/197773-support-nanoclaw-lightweight-secure-ai-agent-for-unraid/</Support>
   <Project>https://github.com/qwibitai/nanoclaw</Project>

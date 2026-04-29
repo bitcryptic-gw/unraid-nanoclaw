@@ -12,6 +12,7 @@
   <MyIP></MyIP>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
+  <Autostart>true</Autostart>
 
   <Project>https://github.com/bitcryptic-gw/acurast-signer</Project>
   <TemplateURL>https://raw.githubusercontent.com/bitcryptic-gw/unraid-nanoclaw/main/acurast-signer.xml</TemplateURL>
