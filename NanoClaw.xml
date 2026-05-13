@@ -45,7 +45,8 @@ Requirements:
 - Docker socket access (required for agent container isolation)
 
 Messaging Channels:
-At least one of Telegram or Matrix must be configured. Both can run simultaneously.
+Matrix is the primary channel and recommended starting point. Telegram is available
+via the nanoclaw-telegram skill install. At least one channel must be configured.
 
 Telegram: Set TELEGRAM_BOT_TOKEN from @BotFather. After starting the container,
 send /chatid to your bot and run the registration command — see the project README.
