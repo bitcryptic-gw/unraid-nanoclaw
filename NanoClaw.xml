@@ -39,7 +39,7 @@ Features:
 - Memory via per-group CLAUDE.md files
 
 Requirements:
-- Anthropic API key (console.anthropic.com)
+- Anthropic API key (console.anthropic.com) — or a local model via LiteLLM/Ollama provider override
 - Telegram bot token from @BotFather (for Telegram channel)
 - Matrix homeserver account, e.g. self-hosted Synapse (for Matrix channel)
 - Docker socket access (required for agent container isolation)
